@@ -1,5 +1,7 @@
 import json
 import click
+
+import pandas as pd
 from .pytorch import (
     load_model as pytorch_load_model,
     get_inference_function as pytorch_get_inference_function,
