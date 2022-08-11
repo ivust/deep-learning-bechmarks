@@ -17,7 +17,7 @@ def preprocess_input(x: np.ndarray) -> torch.Tensor:
 
 def get_inference_function(
     model: torch.nn.Module,
-) -> Callable[torch.Tensor, torch.Tensor]:
+) -> Callable[[torch.Tensor], torch.Tensor]:
     def _func(x):
         return model(x)
 
