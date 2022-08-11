@@ -1,6 +1,9 @@
 import json
 import click
-import pytorch, evaluate
+from .pytorch import (
+    load_model as pytorch_load_model,
+    get_inference_function as pytorch_get_inference_function,
+)
 
 
 @click.command()
@@ -11,7 +14,7 @@ import pytorch, evaluate
 @click.option("--input-shape", type=str, help="Shape of the model input")
 def main(pytorch_model_path, openvino, input_shape):
     input_shape = json.loads(input_shape)
-    model = pytorch.load_model(pytorch_model_path)
+    model = pytorch_load_model(pytorch_model_path)
     pytorch_results = evaluate.evaluate(
         pytorch.get_inference_function(model), pytorch.preprocess_input, input_shape
     )
