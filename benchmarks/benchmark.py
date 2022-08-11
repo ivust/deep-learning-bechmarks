@@ -24,7 +24,8 @@ def main(pytorch_model_path, openvino, input_shape):
     combined_results = {"PyTorch": pytorch_results}
     results_df = analyze_results(combined_results)
 
-    print(results_df.round(2).to_string())
+    # print(results_df.round(2).to_string())
+    print(results_df.round(2))
 
 
 if __name__ == "__main__":
