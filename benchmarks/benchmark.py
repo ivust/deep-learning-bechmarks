@@ -26,9 +26,9 @@ def main(pytorch_model_path, openvino, input_shape):
     combined_results = {"PyTorch": pytorch_results}
     results_df = analyze_results(combined_results)
 
-    # print(results_df.round(2).to_string())
-    with pd.option_context("display.max_rows", None, "display.max_columns", None):
-        print(results_df.round(2))
+    print(results_df.round(2).to_string())
+    # with pd.option_context("display.max_rows", None, "display.max_columns", None):
+    #     print(results_df.round(2))
 
 
 if __name__ == "__main__":

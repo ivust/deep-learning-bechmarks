@@ -43,6 +43,7 @@ def analyze_results(dict_results):
             df[("Latency", batch_size)].append(np.mean(batch_latencies))
             df[("Throughput", batch_size)].append(np.mean(batch_throughputs))
 
+    df = {k: df[k] for k in sorted(df)}
     df = pd.DataFrame(df)
     df.index = model_names
     return df
