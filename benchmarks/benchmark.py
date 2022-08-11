@@ -25,3 +25,7 @@ def main(pytorch_model_path, openvino, input_shape):
     results_df = analyze_results(combined_results)
 
     print(results_df.to_string())
+
+
+if __name__ == "__main__":
+    main()
