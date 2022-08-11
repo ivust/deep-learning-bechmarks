@@ -9,7 +9,7 @@ def evaluate(
     inference_function,
     preprocessing_function,
     input_shape,
-    batch_sizes=2 ** np.arange(3),
+    batch_sizes=2 ** np.arange(5),
     warmup=3,
     num_trials=10,
 ):
