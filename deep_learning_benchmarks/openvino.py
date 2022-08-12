@@ -29,7 +29,9 @@ def convert_model(
                 "FP32",
                 "--input_shape",
                 json.dumps([batch_size] + input_shape),
-            ]
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
         )
 
 
