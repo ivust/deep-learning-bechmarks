@@ -50,6 +50,7 @@ def main(pytorch_model_path, openvino, input_shape, batch_sizes, num_trials, war
     combined_results["PyTorch"] = pytorch_results
 
     if openvino:
+        logging.info("Start OpenVINO model benchmarking")
         pytorch_convert_to_onnx(
             model=model,
             save_path="model_onnx",

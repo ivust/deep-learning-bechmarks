@@ -1,5 +1,6 @@
 from typing import Callable, List
 from pathlib import Path
+import logging
 import subprocess
 import json
 
@@ -13,8 +14,8 @@ def convert_model(
     batch_sizes: List[int],
     output_dir: str,
 ) -> None:
+    logging.info("Converting ONNX model to OpenVINO format")
     saved_onnx_models_path = Path(saved_onnx_models_path)
-    saved_onnx_models_path
     for batch_size in batch_sizes:
         subprocess.run(
             [

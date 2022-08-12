@@ -1,11 +1,13 @@
 from typing import Callable, List
 from pathlib import Path
+import logging
 
 import torch
 import numpy as np
 
 
 def load_model(model_path: str) -> torch.nn.Module:
+    logging.info("Load PyTorch model")
     model = torch.load(model_path)
     return model
 
@@ -16,6 +18,7 @@ def convert_to_onnx(
     input_shape: List[int],
     batch_sizes: List[int],
 ) -> None:
+    logging.info("Converting PyTorch model to ONNX")
     save_path = Path(save_path)
     save_path.mkdir()
     for batch_size in batch_sizes:
