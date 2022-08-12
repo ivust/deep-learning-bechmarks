@@ -7,7 +7,7 @@ import numpy as np
 
 
 def load_model(model_path: str) -> torch.nn.Module:
-    logging.info("Load PyTorch model")
+    logging.info("Loading PyTorch model")
     model = torch.load(model_path)
     return model
 
