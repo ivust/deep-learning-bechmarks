@@ -33,6 +33,7 @@ from .evaluate import evaluate, analyze_results
     "--warmup", type=int, default=3, help="Number of initial trials which are discarded"
 )
 def main(pytorch_model_path, openvino, input_shape, batch_sizes, num_trials, warmup):
+    combined_results = {}
     model = pytorch_load_model(pytorch_model_path)
     pytorch_results = evaluate(
         inference_function=pytorch_get_inference_function(model),
@@ -42,6 +43,7 @@ def main(pytorch_model_path, openvino, input_shape, batch_sizes, num_trials, war
         warmup=warmup,
         num_trials=num_trials,
     )
+    combined_results["PyTorch"] = pytorch_results
 
     if openvino:
         pytorch_convert_to_onnx(
@@ -66,11 +68,11 @@ def main(pytorch_model_path, openvino, input_shape, batch_sizes, num_trials, war
             warmup=warmup,
             num_trials=num_trials,
         )
+        combined_results["OpenVINO"] = openvino_results
 
         shutil.rmtree("model_onnx")
         shutil.rmtree("model_openvino")
 
-    combined_results = {"PyTorch": pytorch_results, "OpenVINO": openvino_results}
     results_df = analyze_results(combined_results)
     print(results_df.round(2).to_string())
 
