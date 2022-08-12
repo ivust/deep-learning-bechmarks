@@ -14,6 +14,7 @@ def convert_model(
     output_dir: str,
 ) -> None:
     saved_onnx_models_path = Path(saved_onnx_models_path)
+    saved_onnx_models_path.mkdir()
     for batch_size in batch_sizes:
         subprocess.run(
             [
