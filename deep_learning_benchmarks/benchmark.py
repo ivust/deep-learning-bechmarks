@@ -79,6 +79,7 @@ def main(pytorch_model_path, openvino, input_shape, batch_sizes, num_trials, war
         shutil.rmtree("model_openvino")
 
     results_df = analyze_results(combined_results)
+    print("")
     print(results_df.round(2).to_string())
 
 
