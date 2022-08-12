@@ -30,7 +30,7 @@ def evaluate(
         for t, trial in enumerate(range(warmup + num_trials)):
             if int(time.time() - start_evaluation_time) // 30 > last_logging:
                 fraction_done = _get_fraction_done(b, t)
-                logging.info(f"{fraction_done:.%} done")
+                logging.info(f"{fraction_done:.0%} done")
                 last_logging += 1
 
             x = np.random.randn(batch_size, *input_shape)
