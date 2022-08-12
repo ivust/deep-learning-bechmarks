@@ -1,6 +1,7 @@
 import json
 import click
 import shutil
+import logging
 
 import pandas as pd
 from .pytorch import (
@@ -34,6 +35,8 @@ from .evaluate import evaluate, analyze_results
 )
 def main(pytorch_model_path, openvino, input_shape, batch_sizes, num_trials, warmup):
     combined_results = {}
+
+    logging.info("Start PyTorch model benchmarking")
     model = pytorch_load_model(pytorch_model_path)
     pytorch_results = evaluate(
         inference_function=pytorch_get_inference_function(model),

@@ -1,4 +1,5 @@
 import time
+import logging
 from collections import defaultdict
 
 import numpy as np
@@ -15,8 +16,21 @@ def evaluate(
 ):
     results = defaultdict(list)
 
-    for batch_size in batch_sizes:
-        for trial in range(warmup + num_trials):
+    def _get_fraction_done(b, t):
+        total_trials = len(batch_sizes) * (warmup + num_trials)
+        trials_done = b * (warmup + num_trials) + t
+        return trials_done / total_trials
+
+    last_logging = 0
+    start_evaluation_time = time.time()
+
+    for b, batch_size in enumerate(batch_sizes):
+        for t, trial in enumerate(range(warmup + num_trials)):
+            if int(start_evaluation_time - time.time()) // 30 > last_logging:
+                fraction_done = _get_fraction_done(b, t)
+                logging.info(f"{fraction_done:.%} done")
+                last_logging += 1
+
             x = np.random.randn(batch_size, *input_shape)
             x = preprocessing_function(x)
 
