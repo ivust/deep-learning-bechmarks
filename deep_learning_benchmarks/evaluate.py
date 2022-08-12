@@ -24,9 +24,11 @@ def evaluate(
     last_logging = 0
     start_evaluation_time = time.time()
 
+    logging.info("Start runtime benchmarking")
+
     for b, batch_size in enumerate(batch_sizes):
         for t, trial in enumerate(range(warmup + num_trials)):
-            if int(start_evaluation_time - time.time()) // 30 > last_logging:
+            if int(time.time() - start_evaluation_time) // 30 > last_logging:
                 fraction_done = _get_fraction_done(b, t)
                 logging.info(f"{fraction_done:.%} done")
                 last_logging += 1
