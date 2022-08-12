@@ -9,9 +9,9 @@ def evaluate(
     inference_function,
     preprocessing_function,
     input_shape,
-    batch_sizes=2 ** np.arange(3),
-    warmup=3,
-    num_trials=10,
+    batch_sizes,
+    warmup,
+    num_trials,
 ):
     results = defaultdict(list)
 
@@ -46,4 +46,5 @@ def analyze_results(dict_results):
     df = {k: df[k] for k in sorted(df)}
     df = pd.DataFrame(df)
     df.index = model_names
+    df.columns = pd.MultiIndex.from_tuples(df.columns, names=["", "Batch size"])
     return df
