@@ -17,6 +17,7 @@ def convert_to_onnx(
     batch_sizes: List[int],
 ) -> None:
     save_path = Path(save_path)
+    save_path.mdkir()
     for batch_size in batch_sizes:
         input_batch = torch.Tensor(np.random.randn(batch_size, *input_shape))
         torch.onnx.export(
